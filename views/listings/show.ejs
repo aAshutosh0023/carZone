@@ -1,0 +1,304 @@
+
+
+  <% layout('/layouts/boilerplate') -%>
+  
+  <div class="row mt-4">
+      <div class="col-8 col-md-12 col-xs-12 col-sm-12-title ">
+          <h2 class="title"><%= list.title %></h2>
+      </div>
+ 
+    
+       <div class="picsBox">
+        <% if (list.image && list.image.length > 0) { %>
+            <%  for(let i=0; i<list.image.length; i++) { %>
+           <div class="pics" id="pic_<%=i%>" > <img src="<%= list.image[i].url %>" class="card-img-top show-img" alt="listing_image"> </div>    
+          <% }; %>
+      <% }  %> 
+       </div>
+
+
+       <div class="user">
+
+       <div class="details mt-2">
+         
+            
+                  <p id="location"><%= list.location %>,<%= list.country %></p> 
+                  <p id="desc"><%= list.description %></p> 
+                  <p id="price">&#8377;<%= list.price.toLocaleString("en-IN") %></p> 
+               
+                  <hr>
+
+                <div class="host_container">
+                    <div class="host_info">
+                         <img src="https://i.pinimg.com/736x/44/4b/d6/444bd6f7040c5ead15609750140c3713.jpg" alt="">
+                        <div class="host_detail">
+                          <div  id="host_name">Selling by <%= list.owner.username %></div>   
+                   <div  id="host_year"><%= Math.floor(Math.random() * 15) + 1 %> Year Seller </div>
+                        
+                                         </div>
+                                        </div>
+                  
+                   
+
+             <% if(currentUser && currentUser._id.equals(list.owner._id)){ %>  
+                <div class="host_actions">
+                <a href="/listings/<%= list.id %>/edit" class="btn btn-dark edit-btn">Update</a>
+
+                  <form method="post" action="/listings/<%= list.id %>?_method=DELETE">
+                      <button class="btn btn-dark delete-btn">Delete</button>
+                     </form>
+                        </div> 
+                    <% } %>
+                </div>   
+                
+             
+         
+      </div>
+</div>
+  </div>
+    
+  
+  <div class="col-12 mb-3">
+      <% if(currentUser) { %>
+          <hr>
+          <h4>Leave a Review</h4>
+          <form action="/listings/<%= list.id %>/reviews" method="post" novalidate class="needs-validation">
+              <div class=" mt-3">
+                  <label for="rating" class="form-label">Rating</label>
+                  <fieldset class="starability-heart">
+                      <!-- Rating inputs -->
+                      <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating."/>
+        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+                  </fieldset>
+              </div>
+              <div class="mb-3 col-md-8 col-lg-5  col-xs-12">
+                  <label for="comment" class="form-label">Comments</label>
+                  <textarea name="review[comment]" id="comment" cols="30" rows="6" class="form-control" required></textarea>
+                  <div class="valid-feedback">Comment Looks good!</div>
+                  <div class="invalid-feedback">Comment should be valid!</div>
+              </div>
+              <button class="btn btn-outline-dark" type="submit">Submit</button>
+          </form>
+      <% } %>
+      <hr>
+      <p><b>All Reviews</b></p> 
+      <div class="row">
+          <% for(review of list.reviews){ %>
+              <div class=" card  col-lg-5 col-11 mb-3 ms-3 ">
+                  <div class="card-body">
+                      <h5 class="card-title"><%= review.author.username %></h5>
+                      <p class="starability-result card-text" data-rating=<%= review.rating %>></p>    
+                      <p class="card-text"><%= review.comment %></p>
+                  </div>
+                  <form method="post" action="/listings/<%= list.id %>/reviews/<%= review.id %>?_method=DELETE" class="mb-3">
+                      <button class="btn btn-dark btn-sm mt-2">Delete</button>
+                  </form>
+              </div> 
+          <% } %>
+         <hr>
+          <h2>Where you'll be</h2>
+      </div>
+  </div>
+
+  
+ 
+  <!--****************************************************************************-->
+
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>map</title>
+  
+     <style>
+
+  body {
+      font-family: 'Nunito Sans', sans-serif;
+  }
+  main {
+      display: flex;
+  }
+  
+
+  #map {
+     right: 1rem;
+     margin-bottom: 5%;
+      height: 60vh;
+     width: 100%;
+
+  }
+ 
+  ::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+      border-left: 0;
+      background: rgba(0, 0, 0, 0.1);
+  }
+  ::-webkit-scrollbar-thumb {
+      background: #ff6900;
+      border-radius: 0;
+  }
+  .leaflet-popup-content-wrapper {
+      padding: 0;
+      overflow: hidden;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content {
+      margin: 0;
+  }
+  .leaflet-popup-content-wrapper h4 {
+      padding: 16px;
+      background: #ff6804;
+      color: #fff;
+      font-size: 16px;
+  }
+  .leaflet-popup-content-wrapper p {
+      padding: 0 16px;
+      font-size: 14px;
+      margin-bottom: 14px;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .phone-number {
+      padding: 16px;
+      padding-top: 0;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .phone-number a {
+      color: #ff6808;
+      font-size: 14px;
+  }
+  
+
+  
+   </style>
+     
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" /> 
+
+         
+        
+  </head>
+  <body>
+
+    
+    <main>
+   
+      <div class="store-list">
+          <div class="heading">
+            
+          </div>
+          <ul class="list"></ul>
+          </ul>
+      </div>
+      <div id="map"></div>
+  </main>
+       
+    
+  
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    
+  
+  
+    <script> 
+    
+    const coordinatesArr = JSON.parse('<%- JSON.stringify(list.geometry.coordinates) %>');
+                  
+    const storeList = [
+
+      {
+          "type": "Feature",
+          "geometry": { 
+             "type": "Point",
+       "coordinates": [coordinatesArr[0], coordinatesArr[1]]
+         },
+          "properties": {
+            "name": `<%=list.title%>`,
+            "address": `<%=list.location%>, <%=list.country%>`,
+            "phone": "+918769925940"
+          }
+        },
+
+      
+       
+       ]</script> 
+    
+       <script> 
+
+        if (coordinatesArr.length == 0) {
+    coordinatesArr.push(79.07306671); // Latitude
+    coordinatesArr.push(22.9074872); // Longitude 
+} 
+
+     
+      const myMap = L.map('map').setView([coordinatesArr[1], coordinatesArr[0]],10);
+      const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+      const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Coded by Ashutosh with ❤️';
+      const tileLayer = L.tileLayer(tileUrl, { attribution });
+      tileLayer.addTo(myMap);
+  
+    
+  
+      function makePopupContent(shop) {
+          return `
+          <div>
+              <h4>${shop.properties.name}</h4>
+              <p>${shop.properties.address}</p>
+              <div class="phone-number">
+                  <a href="tel:${shop.properties.phone}">${shop.properties.phone}</a>
+              </div>
+          </div>
+          `;
+      }
+  
+      function onEachFeature(feature, layer) {
+          layer.bindPopup(makePopupContent(feature), { closeButton: false, offset: L.point(0, -8) });
+      }
+  
+      const locateIcon = L.icon({
+       
+          iconUrl:"https://i.postimg.cc/9FHtkxHP/vecteezy-pin-location-icon-sign-symbol-design-10157991.png",
+         
+          iconSize: [15, 25]
+      });
+  
+      const shopsLayer = L.geoJSON(storeList, {
+          onEachFeature: onEachFeature,
+          pointToLayer: function(feature, latlng) {
+              return L.marker(latlng, { icon: locateIcon }).on('click', function() {
+                  flyToStore(feature);
+              });
+          }
+      });
+  
+      shopsLayer.addTo(myMap);
+  
+      function flyToStore(store) {
+          const lat = store.geometry.coordinates[1];
+          const lng = store.geometry.coordinates[0];
+          myMap.flyTo([lat, lng], 14, );    // { duration: 1 }
+  
+          // Open popup after flyTo animation completes
+          setTimeout(() => {
+              L.popup({ closeButton: false, offset: L.point(0, -8) })
+              .setLatLng([lat, lng])
+              .setContent(makePopupContent(store))
+              .openOn(myMap);
+          }, 3000);
+      }
+  </script>
+  
+  </body>
+  </html>
+
+

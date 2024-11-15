@@ -1,0 +1,238 @@
+
+<% layout('/layouts/boilerplate') -%>
+
+
+
+<!--
+<form id="filterForm" action="/filtered" method="GET">
+  <input type="hidden" name="category" id="category" value="">
+ <div id="filters">
+  
+  <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('trending')" class="butt" data-category="trending">
+       <div><i class="icn fa-solid fa-fire"></i></div> 
+      </button>   
+      <p class="filter_name">Trending</p>
+    </div>
+
+
+
+  <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('rooms')" class="butt" data-category="rooms">
+  <div><i class="icn fa-solid fa-bed"></i> </div> 
+      </button>
+  <p class="filter_name"> Rooms</p>
+  </div>
+
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('iconic_cities')" class="butt" data-category="iconic_cities">
+  <div><i class="icn fa-solid fa-mountain-city"></i> </div>  </button>
+  <p class="filter_name">Cities</p>
+  </div>
+
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('boats')" class="butt" data-category="boats" >
+  <div><i class="icn fa-solid fa-ship"></i> </div>   </button>
+  <p class="filter_name">Boats</p> 
+  </div>
+
+
+
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('castles')" class="butt" data-category="castles">
+  <div><i class="icn fa-brands fa-fort-awesome"></i> </div>   </button>
+  <p class="filter_name">Castles</p> 
+  </div>
+
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('beach')"  class="butt" data-category="beach">
+  <div><i class="icn fa-solid fa-umbrella-beach"></i> </div>  </button>
+  <p class="filter_name">Beach</p>
+  </div>
+
+
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('camping')" class="butt" data-category="camping">
+  <div><i class="icn fa-solid fa-campground"></i> </div>  </button>
+  <p class="filter_name">Camping</p>
+  </div>
+
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('mountains')" class="butt" data-category="mountains">
+  <div><i class="icn fa-solid fa-mountain"></i> </div> </button>
+  <p class="filter_name">Mountains</p>
+  </div>
+  
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('farms')" class="butt" data-category="farms">
+  <div><i class="icn fa-solid fa-cow"></i> </div> </button>
+  <p class="filter_name">Farms</p>
+  </div>
+         
+
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('arctic')" class="butt" data-category="arctic">
+  <div><i class="icn fa-solid fa-snowflake"></i> </div> </button>
+  <p class="filter_name">Arctic</p>
+  </div>
+
+  <div class="filter">
+    <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('domes')" class="butt" data-category="domes">
+  <div><i class="icn fa-solid fa-igloo"></i></div> </button>
+  <p class="filter_name">Domes</p>
+  </div>
+
+  
+  
+ 
+
+
+    <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input class="form-check-input tax-toggle-switch" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label" for="flexSwitchCheckDefault">Display Total After Taxes</label>
+    </div>   
+  </div>
+
+ </div>
+</form> -->
+<form id="filterForm" action="/filtered" method="GET">
+  <input type="hidden" name="category" id="category" value="">
+
+  <div id="filters">
+  
+    <!-- Trending Cars -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('trending')" class="butt" data-category="trending">
+        <div><i class="icn fa-solid fa-fire"></i></div>
+      </button>
+      <p class="filter_name">Trending</p>
+    </div>
+
+    <!-- Sedans -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('sedan')" class="butt" data-category="sedan">
+        <div><i class="icn fa-solid fa-car-side"></i></div>
+      </button>
+      <p class="filter_name">Sedans</p>
+    </div>
+
+    <!-- SUVs -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('suv')" class="butt" data-category="suv">
+        <div><i class="icn fa-solid fa-truck-monster"></i></div>
+      </button>
+      <p class="filter_name">SUVs</p>
+    </div>
+
+    <!-- Coupes -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('coupe')" class="butt" data-category="coupe">
+        <div><i class="icn fa-solid fa-car"></i></div>
+      </button>
+      <p class="filter_name">Coupes</p>
+    </div>
+
+    <!-- Convertibles -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('convertible')" class="butt" data-category="convertible">
+        <div><i class="icn fa-solid fa-shuttle-van"></i></div>
+      </button>
+      <p class="filter_name">Convertibles</p>
+    </div>
+
+    <!-- Trucks -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('truck')" class="butt" data-category="truck">
+        <div><i class="icn fa-solid fa-truck-pickup"></i></div>
+      </button>
+      <p class="filter_name">Trucks</p>
+    </div>
+
+    <!-- Hatchbacks -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('hatchback')" class="butt" data-category="hatchback">
+        <div><i class="icn fa-solid fa-car-side"></i></div>
+      </button>
+      <p class="filter_name">Hatchbacks</p>
+    </div>
+
+    <!-- Electric Cars -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('electric')" class="butt" data-category="electric">
+        <div><i class="icn fa-solid fa-bolt"></i></div>
+      </button>
+      <p class="filter_name">Electric</p>
+    </div>
+
+    <!-- Luxury Cars -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('luxury')" class="butt" data-category="luxury">
+        <div><i class="icn fa-solid fa-gem"></i></div>
+      </button>
+      <p class="filter_name">Luxury</p>
+    </div>
+
+    <!-- Sports Cars -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('sports')" class="butt" data-category="sports">
+        <div><i class="icn fa-solid fa-flag-checkered"></i></div>
+      </button>
+      <p class="filter_name">Sports</p>
+    </div>
+
+    <!-- Vans -->
+    <div class="filter">
+      <button type="submit" style="border: none; background-color: transparent;" onclick="setcategory('van')" class="butt" data-category="van">
+        <div><i class="icn fa-solid fa-shuttle-van"></i></div>
+      </button>
+      <p class="filter_name">Vans</p>
+    </div>
+
+    <!-- Tax Toggle -->
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input tax-toggle-switch" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display Total After Taxes</label>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+
+
+ <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 mt-3  ">
+ 
+  <% for(list of Lists){ %>
+    <a class="listing-link" href="/listings/<%=list.id%>">
+    <div class="col card listing-card">
+
+     
+
+      <% if (list.image && list.image.length > 0) { %>
+        <img src="<%= list.image[0].url %>"class="card-img-top" alt="listing image" style="height:20rem" >
+    <% }  %>
+     
+       <div class="card-img-overlay"> </div>
+       <div class="card-body">
+         <p class="card-text">
+         <b><%= list.title %> </b> <br>
+        &#8377;<%=list.price.toLocaleString("en-IN")%> /night 
+
+       
+           <i class="tax-info"> +  &#8377; <%= list.price * 0.18 %>(18% GST)</i>
+         </p>
+       </div>
+     </div>
+    </a>
+     <% } %>
+   
+    
+    
+ </div>
+ 
+
+ 
+
+  
