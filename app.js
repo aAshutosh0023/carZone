@@ -45,11 +45,11 @@ const { constants } = require("buffer");
 
  app.use(express.static(path.join(__dirname,"/public")));
 
- //const dbUrl = process.env.ATLASDB_URL ;
+ const dbUrl = process.env.ATLASDB_URL ;
  const sessionKey = process.env.SESSION_KEY;
  const mongoUrl ='mongodb://127.0.0.1:27017/wanderlust'
 
- const store = MongoStore.create({ mongoUrl: mongoUrl ,
+ const store = MongoStore.create({ mongoUrl: dbUrl ,
  crypto: {
    secret: sessionKey
  },
@@ -83,7 +83,7 @@ store.on("error",()=>{
    })
 
    async function main(){
-    await mongoose.connect(mongoUrl);
+    await mongoose.connect(dbUrl);
  }
  
 
