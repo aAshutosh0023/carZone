@@ -189,13 +189,13 @@
       <p class="filter_name">Vans</p>
     </div>
 
-    <!-- Tax Toggle -->
+   <!-- Tax Toggle -->
     <div class="tax-toggle">
       <div class="form-check-reverse form-switch">
         <input class="form-check-input tax-toggle-switch" type="checkbox" role="switch" id="flexSwitchCheckDefault">
         <label class="form-check-label" for="flexSwitchCheckDefault">Display Total After Taxes</label>
       </div>
-    </div>
+    </div> 
 
   </div>
 </form>
@@ -218,7 +218,7 @@
        <div class="card-body">
          <p class="card-text">
          <b><%= list.title %> </b> <br>
-        &#8377;<%=list.price.toLocaleString("en-IN")%> /night 
+        &#8377;<%=list.price.toLocaleString("en-IN")%>
 
        
            <i class="tax-info"> +  &#8377; <%= list.price * 0.18 %>(18% GST)</i>
