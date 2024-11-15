@@ -18,7 +18,7 @@ module.exports.signup=async(req,res)=>{
           {
           return next(err);
              }
-          req.flash("successMsg","Welcome to wanderlust");
+          req.flash("successMsg","Welcome to carZone");
           res.redirect("/listings");
       } );
      
@@ -36,7 +36,7 @@ module.exports.signup=async(req,res)=>{
 
 //login
    module.exports.logIn = async(req,res)=>{
-       req.flash("successMsg","Welcome back to wanderlust");
+       req.flash("successMsg","Welcome back to carZone");
         if(res.locals.redirectUrl){ //agar redirect path khali nhi aaya toh ..
          return res.redirect(res.locals.redirectUrl);
         }
